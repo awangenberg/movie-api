@@ -21,6 +21,16 @@ export enum Category {
     releaseDate: Date;
 }
 
+export const ratingValidator = [
+  check("rating")
+  .exists()
+  .withMessage("rating is required")
+  .isNumeric()
+  .withMessage("rating should be a valid number")
+  .isFloat({ min: 0, max: 5 })
+    .withMessage("rating should be a number between 0 and 5 (inclusive)")
+]
+
 export const movieValidator = [
   check("title")
     .exists()
@@ -43,11 +53,6 @@ export const movieValidator = [
     .withMessage("category is required")
     .isIn(Object.values(Category))
     .withMessage(`category should be one of the following categories: ${Object.values(Category)}`),
-
-  check("rating")
-    .exists()
-    .withMessage("rating is required")
-    .withMessage("rating should be a valid number"),
 
   check("releaseDate")
     .exists()

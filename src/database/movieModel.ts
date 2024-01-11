@@ -3,9 +3,9 @@ import { EnumType } from "typescript";
 import { SequelizeConnection } from "./sequelize";
 import { Category } from "../model/movie";
 
-export default class Movie extends Model {
+export default class MovieModel extends Model {
     
-    id!: number;
+    movieId!: number;
 
     title!: string;
 
@@ -20,10 +20,10 @@ export default class Movie extends Model {
 
 const sequelizeConnection = SequelizeConnection.getInstance();
 
-Movie.init(
+MovieModel.init(
     {
-        id: {
-            field: "id",
+        movieId: {
+            field: "movieId",
             primaryKey: true,
             type: DataTypes.INTEGER,
             allowNull: false,
@@ -56,5 +56,4 @@ Movie.init(
         modelName: "Movie",
     },
 );
-
-Movie.sync().then();
+MovieModel.sync().then();
