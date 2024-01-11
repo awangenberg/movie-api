@@ -2,7 +2,7 @@ import { Router, Request, Response, RequestHandler } from 'express';
 import { type } from 'node:os';
 import { body, check, validationResult } from 'express-validator';
 import { SequelizeConnection } from './database/sequelize';
-import { createNewMovie, getMovies, getMoviesById, updateRating } from './services/movieService';
+import { createNewMovie, getMovies, getMovieById, updateRating } from './services/movieService';
 import { movieValidator, ratingValidator } from './model/validation';
 import { Movie } from './model/movie';
 
@@ -57,7 +57,7 @@ router.get('/movies/:id', async (req: Request, res: Response) => {
         return res.status(400).send(JSON.stringify("Id most be a number"));
     }
 
-    const movie = await getMoviesById(id);
+    const movie = await getMovieById(id);
 
     if (movie === null) {
         return res.status(404).send(JSON.stringify("Movie not found"));
