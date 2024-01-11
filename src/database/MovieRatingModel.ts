@@ -1,9 +1,9 @@
 import { DataTypes, Model } from "sequelize";
-import { EnumType } from "typescript";
 import { SequelizeConnection } from "./sequelize";
+import MovieModel from "./movieModel";
 
 export default class MovieRating extends Model {
-    id!: number
+    movieRatingId!: number;
 
     movieId!: number;
 
@@ -14,16 +14,20 @@ const sequelizeConnection = SequelizeConnection.getInstance();
 
 MovieRating.init(
     {
-        id: {
-            field: "id",
+        movieRatingId: {
+            field: "movieRatingId",
             primaryKey: true,
             type: DataTypes.INTEGER,
             allowNull: false,
             autoIncrement: true,
         },
         movieId: {
-            field: 'movieId',
+            field: "movieId",
             type: DataTypes.INTEGER,
+            references: {
+                model: MovieModel,
+                key: 'movieId',
+              },
         },
         rating: {
             field: 'rating',
@@ -36,5 +40,4 @@ MovieRating.init(
         modelName: "MovieRating",
     },
 );
-
 MovieRating.sync().then();

@@ -24,7 +24,7 @@ router.post('/movies', movieValidator, validate,
         return res.status(201).send(JSON.stringify(id));
     });
 
-router.patch('/movies:id', ratingValidator, validate,
+router.patch('/movies/:id', ratingValidator, validate,
     async (req: Request, res: Response) => {
 
         const id = Number(req.params.id)
@@ -34,13 +34,13 @@ router.patch('/movies:id', ratingValidator, validate,
             return res.status(400).send(JSON.stringify("Id most be a number"));
         }
 
-        const movieToUpdate = await updateRating(id, newRating);
+        const averageRating = await updateRating(id, newRating);
 
-        if (movieToUpdate == null) {
+        if (averageRating == null) {
             return res.status(404).send(JSON.stringify("Movie not found"));
         }
 
-        return res.json((movieToUpdate));
+        return res.json({averageRating: averageRating});
     });
 
 router.get('/movies', async (req: Request, res: Response) => {
