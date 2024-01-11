@@ -19,7 +19,7 @@ export const createNewMovie = async (newMovie: Movie) => {
   return createdMovie.movieId;
 };
 
-export const getMoviesById = async (id: number) => {
+export const getMovieById = async (id: number) => {
 
   const movie = await Movies.findByPk(id);
   if (!movie) {
