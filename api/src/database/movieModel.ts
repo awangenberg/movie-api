@@ -4,7 +4,7 @@ import { SequelizeConnection } from "./sequelize";
 import { Category } from "../model/movie";
 
 export default class MovieModel extends Model {
-    
+
     movieId!: number;
 
     title!: string;
@@ -43,7 +43,7 @@ MovieModel.init(
         },
         category: {
             field: 'category',
-            type: DataTypes.ENUM({values: Object.values(Category)}),
+            type: DataTypes.ENUM({ values: Object.values(Category) }),
         },
         releaseDate: {
             field: 'releaseDate',
